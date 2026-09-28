@@ -1,0 +1,19 @@
+package Ex03;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.function.Consumer;
+import java.util.function.Supplier;
+public class Main {
+    public static void main(String[] args) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        Supplier<String> timeSupplier = () -> LocalDateTime.now().format(formatter);
+        Consumer<String> logger = message -> System.out.println("| -> " + message);
+        System.out.println("+-------------------------------------------------------+");
+        System.out.println("|          NHẬT KÝ HỆ THỐNG CONSUMER-SUPPLIER         |");
+        System.out.println("+-------------------------------------------------------+");
+        AuditLogger.logEvent(timeSupplier, logger, "USER_LOGIN");
+        AuditLogger.logEvent(timeSupplier, logger, "UPDATE_DATABASE");
+        AuditLogger.logEvent(timeSupplier, logger, "SYSTEM_BACKUP");
+    }
+}
